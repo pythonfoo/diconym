@@ -1,0 +1,30 @@
+#keys to anonymize
+
+
+#group patient 	0010,....
+
+0010,0010	name
+0010,0020	patientID
+0010,0030	birthday
+0010,0040	sex
+
+#group machine	
+
+0008,0070	manufacturer
+0018,1000	SN
+0018,1020	SW-version
+0018,700A	detector-ID
+0018,702A	detector-manufacturername
+0018,702B	detector-modelname
+
+
+#group doc	
+
+0008,0090	doc
+
+
+
+
+#group UIDs	different
+
+

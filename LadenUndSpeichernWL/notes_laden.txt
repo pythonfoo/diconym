@@ -1,0 +1,6 @@
+Ziel: Whitelists laden
+Idee 1:
+Tags aus einer einfachen Textdatei laden
+'#' : Zeile ignorieren
+' ' : alles spätere ignorieren
+'\n': Eintragtrennung
