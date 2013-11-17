@@ -16,6 +16,7 @@ def ignore_lines_sharp(lines):
 			pass
 		else:
 			result.append(line)
+	return result
 
 def ignore_lines_spaces(lines):
 	result = []
@@ -36,3 +37,4 @@ def main(filename):
 	step3 = ignore_lines_sharp(step2)
 	step4 = ignore_lines_spaces(step3)
 	return step4
+print main('keys2hold.txt')

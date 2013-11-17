@@ -17,6 +17,7 @@ class core():
 	getWhiteLists()
 	getValuesFromImage(filename)
 	setWhiteList(id,whitelist)
+	isDicom(fullpath)
 
 from future import
 * Whitelisteditor
