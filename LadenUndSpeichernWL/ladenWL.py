@@ -22,7 +22,7 @@ def ignore_lines_spaces(lines):
 	tmpLine = ''
 	for line in lines:
 		for i in range(len(line)):
-			if list(line)[i] != ' ':
+			if list(line)[i] != '	' and list(line)[i] != ' ':
 				tmpLine += list(line)[i]
 			else:
 				break
