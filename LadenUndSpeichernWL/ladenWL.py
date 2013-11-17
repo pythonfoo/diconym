@@ -31,10 +31,25 @@ def ignore_lines_spaces(lines):
 		tmpLine = ''
 	return result
 
+def string_converter(lines):
+	result = []
+	tmpPart1 = ''
+	tmpPart2 = ''
+	for line in lines:
+		tmp = line.split(',')
+		tmpPart1 = tmp[0]
+		tmpPart2 = tmp[1]
+		result.append((tmpPart1,tmpPart2))
+	
+	return result
+
+
 def main(filename):
 	step1 = read_file(filename)
 	step2 = read_line(step1)
 	step3 = ignore_lines_sharp(step2)
 	step4 = ignore_lines_spaces(step3)
-	return step4
+	step5 = string_converter(step4)
+	return step5
+	
 print main('keys2hold.txt')
