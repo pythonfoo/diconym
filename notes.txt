@@ -17,3 +17,6 @@ class core():
 	getWhiteLists()
 	getValuesFromImage(filename)
 	setWhiteList(id,whitelist)
+
+from future import
+* Whitelisteditor
