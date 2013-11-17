@@ -1,6 +1,23 @@
 #!/usr/bin/env python 
 #-*- coding: utf-8 -*-
-""" Some Description to enter"""
+""" 
+********** DICONYM Core ***************
+
+DICONYM is a pythonfoo project based in
+the pydicom lib:
+    http://code.google.com/p/pydicom/
+
+Project Home: 
+    https://github.com/pythonfoo/diconym
+
+Project Members:
+    Mechtilde 
+    Mikaedo
+    Bison
+    DoDo
+    Drill
+    Oerb
+"""
 __author__ = "pyhtonfoo"
 __copyright__ = "GPL 2013"
 __license__ = "GPL v3 Plus" 
