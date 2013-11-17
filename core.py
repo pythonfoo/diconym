@@ -14,7 +14,7 @@ Project Members:
     Mechtilde 
     Mikeadvo
     Bison
-    DoDo
+    dodo
     Drill
     Oerb
 """
