@@ -43,7 +43,7 @@ def getFileFromDir(dirPath):
         fPath = os.path.join(dirPath, fname)                                    
         if isDicom(fPath):                                                      
             dcmFiles.append(fPath)                                              
-    print dcmFiles  
+    return dcmFiles  
 
 def get_valuesfromImage(filename):                                              
     """                                                                         
