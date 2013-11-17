@@ -1,4 +1,4 @@
 diconym
 =======
 
-A Python GUI program to annonymise DICOM files
+A Python GUI program to anonymize DICOM files
