@@ -1,0 +1,19 @@
+Name: diconym
+Pythonversion: Python 2.7
+Graphische Oberfläche: TKINTER
+Lizenz: GPL v3 +
+Tasks:
+1. Prüfung welche Dateien im Ordner zusammengehören
+2. Prüfung ob Dicom Dateien
+3. Open Folder Dialog / Open File Dialog
+4. Whitelist der zu annonymisierenden Feldern
+5. Anzeige Inhalt
+6. Verschiedene Profile für die Annonymisierung
+7. Doku
+
+class core():
+	getFilesFromdir(dirname)
+	getWhiteList(id)
+	getWhiteLists()
+	getValuesFromImage(filename)
+	setWhiteList(id,whitelist)
