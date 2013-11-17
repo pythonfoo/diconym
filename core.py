@@ -46,6 +46,8 @@ def get_valuesfromImage(filename):
     """                                                                         
     Read data element tag, value, VR, VM, description from DICOM file.          
     """                                                                         
+    import dicom
+
     datalist = []                                                               
     def tagbased_callback(ds, data_element):                                    
         datalist.append((data_element.tag, data_element.value, data_element.VR, dat
@@ -61,7 +63,9 @@ def get_valuesfromImage(filename):
 
 def anonymize_byWhitelist(whitelist, filename, newfilename):                    
     """                                                                         
-    """                                                                         
+    """
+    import dicom 
+
     def tagbased_callback(ds, data_element):                                    
         """                                                                     
         Delete the value in non Whitelisted Tags                                
