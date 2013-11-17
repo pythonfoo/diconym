@@ -22,6 +22,9 @@ __author__ = "pyhtonfoo"
 __copyright__ = "GPL 2013"
 __license__ = "GPL v3 Plus" 
 
+import os
+import dicom
+
 
 def isDicom(fullpath):                                                          
     isOk = True                                                                 
@@ -46,11 +49,10 @@ def get_valuesfromImage(filename):
     """                                                                         
     Read data element tag, value, VR, VM, description from DICOM file.          
     """                                                                         
-    import dicom
-
     datalist = []                                                               
     def tagbased_callback(ds, data_element):                                    
-        datalist.append((data_element.tag, data_element.value, data_element.VR, dat
+        datalist.append((data_element.tag, data_element.value, data_element.VR, data_element.VM, data_element.description))
+        
                                                                                 
     # Load the current dicom file to get tag- and valuelist                     
     dataset = dicom.read_file(filename)                                         
@@ -63,9 +65,7 @@ def get_valuesfromImage(filename):
 
 def anonymize_byWhitelist(whitelist, filename, newfilename):                    
     """                                                                         
-    """
-    import dicom 
-
+    """ 
     def tagbased_callback(ds, data_element):                                    
         """                                                                     
         Delete the value in non Whitelisted Tags                                
