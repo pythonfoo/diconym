@@ -29,7 +29,7 @@ import dicom
 def isDicom(fullpath):                                                          
     isOk = True                                                                 
     try:                                                                        
-        dcm = dicom.ReadFile(fullpath)                                          
+        dcm = dicom.read_file(fullpath)                                          
     except Exception as ex:                                                     
         isOk = False                                                            
         print fullpath                                                          
