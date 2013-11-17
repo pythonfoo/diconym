@@ -1,0 +1,7 @@
+#tags to anonymize
+
+
+#anonymize UIDs
+
+0020,000d	study instance uid
+0020,000e	series instance id

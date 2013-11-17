@@ -1,0 +1,15 @@
+#tags to hold
+
+
+#for times
+
+0008,0020	study date
+0008,0021	series date
+0008,0022	Acquisition date
+0008,0023	content date
+0008,0030	study time
+0008,0031	series time
+0008,0032	acquisition time	
+0008,0033	content time
+
+

@@ -1,0 +1,6 @@
+#tags to anonymize
+
+
+#anonymize doctor
+
+0008,0090	doctors name

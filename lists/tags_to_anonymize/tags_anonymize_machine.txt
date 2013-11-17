@@ -1,0 +1,12 @@
+#tags to anonymize
+
+
+#anonymize machine	
+
+0008,0070	manufacturer
+0018,1000	SN
+0018,1020	SW-version
+0018,700A	detector-ID
+0018,702A	detector-manufacturername
+0018,702B	detector-modelname
+0018,		hold

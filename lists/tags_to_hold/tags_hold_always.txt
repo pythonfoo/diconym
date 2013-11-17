@@ -1,0 +1,14 @@
+#tags to hold
+
+
+#always 
+
+0020,0010	studyID
+0020,0011	series number
+0020,0012	Acquisition number
+0020,0013	instance number
+0020,0020	patient orientation
+0020,0032	image position
+0020,0037	image orientation
+0020,ff
+0028,ff
