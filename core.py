@@ -15,7 +15,7 @@ Project Members:
     Mikeadvo
     Bison
     dodo
-    Drill
+    Dr1ll
     Oerb
 """
 __author__ = "pyhtonfoo"
