@@ -1,9 +1,9 @@
 #!/usr/bin/env python 
 #-*- coding: utf-8 -*-
 """ 
-********** DICONYM Core ***************
+********** DICOnyM Core ***************
 
-DICONYM is a pythonfoo project based in
+DICOnyM is a pythonfoo project based in
 the pydicom lib:
     http://code.google.com/p/pydicom/
 
@@ -13,9 +13,9 @@ Project Home:
 Project Members:
     Mechtilde 
     Mikeadvo
-    Bison
+    bison
     dodo
-    Dr1ll
+    dr1ll
     Oerb
 """
 __author__ = "pyhtonfoo"
@@ -32,8 +32,8 @@ def isDicom(fullpath):
         dcm = dicom.read_file(fullpath)                                          
     except Exception as ex:                                                     
         isOk = False                                                            
-        print fullpath                                                          
-        print ex                                                                
+        # print fullpath                                                          
+        # print ex                                                                
     return isOk   
 
 def getFileFromDir(dirPath):                                                    
