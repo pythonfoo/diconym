@@ -12,7 +12,7 @@ Project Home:
 
 Project Members:
     Mechtilde 
-    Mikaedo
+    Mikeadvo
     Bison
     DoDo
     Drill
@@ -22,11 +22,14 @@ __author__ = "pyhtonfoo"
 __copyright__ = "GPL 2013"
 __license__ = "GPL v3 Plus" 
 
+import os
+import dicom
+
 
 def isDicom(fullpath):                                                          
     isOk = True                                                                 
     try:                                                                        
-        dcm = dicom.ReadFile(fullpath)                                          
+        dcm = dicom.read_file(fullpath)                                          
     except Exception as ex:                                                     
         isOk = False                                                            
         print fullpath                                                          
@@ -40,7 +43,7 @@ def getFileFromDir(dirPath):
         fPath = os.path.join(dirPath, fname)                                    
         if isDicom(fPath):                                                      
             dcmFiles.append(fPath)                                              
-    print dcmFiles  
+    return dcmFiles  
 
 def get_valuesfromImage(filename):                                              
     """                                                                         
@@ -48,7 +51,8 @@ def get_valuesfromImage(filename):
     """                                                                         
     datalist = []                                                               
     def tagbased_callback(ds, data_element):                                    
-        datalist.append((data_element.tag, data_element.value, data_element.VR, dat
+        datalist.append((data_element.tag, data_element.value, data_element.VR, data_element.VM, data_element.description))
+        
                                                                                 
     # Load the current dicom file to get tag- and valuelist                     
     dataset = dicom.read_file(filename)                                         
@@ -61,7 +65,7 @@ def get_valuesfromImage(filename):
 
 def anonymize_byWhitelist(whitelist, filename, newfilename):                    
     """                                                                         
-    """                                                                         
+    """ 
     def tagbased_callback(ds, data_element):                                    
         """                                                                     
         Delete the value in non Whitelisted Tags                                
