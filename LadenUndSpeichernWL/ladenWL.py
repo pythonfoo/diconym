@@ -1,15 +1,11 @@
 # Laden
 import os
-class whitelist(object):
-	def __init__(self,filename):
-		self.filename = filename
-		step1 = self.read_file(filename)
-		step2 = self.read_line(step1)
-		step3 = self.ignore_lines_sharp(step2)
-		step4 = self.ignore_lines_spaces(step3)
-		step5 = self.string_converter(step4)
-		return step5
+import random
 
+class whitelist(object):
+	def __init__(self,fullpath):
+		self.fullpath = fullpath
+		
 	def read_file(self,filename):
 		file1 = open(filename,'r')
 		result = file1.read()
@@ -51,28 +47,40 @@ class whitelist(object):
 			tmpPart1 = tmp[0]
 			tmpPart2 = tmp[1]
 			result.append((tmpPart1,tmpPart2))
-		
+		return result	
+
+	def listDir(self,fullpath):
+		return os.listdir(fullpath)
+
+	def create_file(self,directory):
+		result = []
+		for f in directory:
+			result.append(f)
 		return result
 
-class filesFromDir(object):
-	def __init__(self,fullpath):
-		self.fullpath = fullpath
-		self.directory = self.listDir()
-		self.files = []
-		self.path = []
-		self.create_file()
-		self.create_path()
+	def create_path(self,files,fullpath):
+		path = []
+		for f in files:
+			path.append(str(fullpath) + '/' + str(f))
+		return path
 
-	def listDir(self):
-		return os.listdir(self.fullpath)
 
-	def create_file(self):
-		for f in self.directory:
-			self.files.append(f)
+	def main_Read(self,filename):
+		step1 = self.read_file(filename)
+		step2 = self.read_line(step1)
+		step3 = self.ignore_lines_sharp(step2)
+		step4 = self.ignore_lines_spaces(step3)
+		step5 = self.string_converter(step4)
+		return step5	
 
-	def create_path(self):
-		for f in self.files:
-			self.path.append(str(self.fullpath) + '/' + str(f))
+	def main_Dir_Read(self,fullpath):	
+		self.directory = self.listDir(fullpath)
+		self.files = self.create_file(self.directory)
+		result = self.create_path(self.files,fullpath)
+		return result
 
-ffd = filesFromDir(os.getcwd())
-print ffd.path
+wl = whitelist(os.getcwd())
+fullpath = wl.fullpath
+path = wl.main_Dir_Read(fullpath)
+r = random.choice(path)
+print wl.main_Read(r)
