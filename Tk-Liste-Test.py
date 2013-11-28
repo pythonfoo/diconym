@@ -165,8 +165,7 @@ class MainDialog(object):
 		for fname in dirList:                                                       
 			fPath = os.path.join(dirPath, fname)                                    
 			dcmFiles[fPath] = fname                                              
-		return dcmFiles  
-		
+		return dcmFiles
 				
 	def startdia(self):
 		sdia = DialogMaker()
@@ -189,19 +188,16 @@ class MainDialog(object):
 		'''
 		
 		allFiles = self.getFilesFromDir(".")
-		
 		longestFullPath = self.getMaxLenFromList(allFiles.keys())
 		longestFileName = self.getMaxLenFromList(allFiles.values())
-		totalLineLen = longestFullPath + longestFileName + 4
+		sumLineLen = longestFullPath + longestFileName + 4
 			
 			
 		finalStringList = []
 		for k in allFiles.keys():
 			finalStringList.append(k.ljust(longestFullPath) + "|" + allFiles[k].rjust(longestFileName))
 
-		
-		sdia.listbox(finalStringList, totalLineLen, 0, 0)
-		
+		sdia.listbox(finalStringList, sumLineLen, 0, 0)		
 		sdia.mainloop()	
 
 def main():
