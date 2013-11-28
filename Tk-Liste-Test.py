@@ -27,6 +27,8 @@ from Tkinter import *
 from tkMessageBox import *
 from tkFileDialog import *
 from tkFont import *
+import core
+import os
 
 class DialogMaker(object):
 	"""Methoden zur Erzeugung und Gestaltung von Tkinter-Dialogen"""
@@ -147,10 +149,31 @@ class DialogMaker(object):
 class MainDialog(object):
 	"""Erzeugt den Hauptdialog"""
 
+	def getMaxLenFromList(self, lst):
+		longest = 0
+		for element in lst:
+			if len(element) > longest:
+				longest = len(element)
+		return longest
+		
+	def getFilesFromDir(self, dirPath):
+		'''for testing prupose, simulate the function from
+		core.getFilesFromDir()
+		'''
+		dirList = os.listdir(dirPath)                                               
+		dcmFiles = {}                                           
+		for fname in dirList:                                                       
+			fPath = os.path.join(dirPath, fname)                                    
+			dcmFiles[fPath] = fname                                              
+		return dcmFiles  
+		
+				
 	def startdia(self):
 		sdia = DialogMaker()
 		stitle = "Diconym - Makes Dicom files anonymous"
 		sdia.title(stitle)
+		
+		'''
 		eintrag11 = "Hallo"
 		eintrag1 = eintrag11 + (15 - len(eintrag11))*" " + "| " + "Welt"+ 5*" "
 		print (15 - len(eintrag11))
@@ -163,6 +186,21 @@ class MainDialog(object):
 		print (15 - len(eintrag31))
 		_liste = [eintrag1, eintrag2, eintrag3]
 		sdia.listbox(_liste, 30, 0, 0)
+		'''
+		
+		allFiles = self.getFilesFromDir(".")
+		
+		longestFullPath = self.getMaxLenFromList(allFiles.keys())
+		longestFileName = self.getMaxLenFromList(allFiles.values())
+		totalLineLen = longestFullPath + longestFileName + 4
+			
+			
+		finalStringList = []
+		for k in allFiles.keys():
+			finalStringList.append(k.ljust(longestFullPath) + "|" + allFiles[k].rjust(longestFileName))
+
+		
+		sdia.listbox(finalStringList, totalLineLen, 0, 0)
 		
 		sdia.mainloop()	
 

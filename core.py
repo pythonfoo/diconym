@@ -38,11 +38,12 @@ def isDicom(fullpath):
 
 def getFileFromDir(dirPath):                                                    
     dirList = os.listdir(dirPath)                                               
-    dcmFiles = []                                                               
+    dcmFiles = {}                                           
     for fname in dirList:                                                       
         fPath = os.path.join(dirPath, fname)                                    
-        if isDicom(fPath):                                                      
-            dcmFiles.append(fPath)                                              
+        if isDicom(fPath):
+            dcmFiles[fPath] = fname
+            #dcmFiles.append(fPath)                                              
     return dcmFiles  
 
 def get_valuesfromImage(filename):                                              
