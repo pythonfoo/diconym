@@ -4,6 +4,7 @@
 #       diconymgraphics.py
 #       
 #       Copyright 2013 Michael Stehmann <info@rechtsanwalt-stehmann.de>
+#       Copyright (C) 2013 for the gettext integration: Mechtilde Stehmann <ooo@mechtilde.de
 #       
 #       This program is free software; you can redistribute it and/or modify
 #       it under the terms of the GNU General Public License as published by
@@ -23,10 +24,12 @@
 # In Debian muessen folgende Pakete zusaetzlich installiert werden:
 # -- python-tk
 
+
 from Tkinter import *
 from tkMessageBox import *
 from tkFileDialog import *
 import core
+import gettext
 
 class DialogMaker(object):
 	"""Methoden zur Erzeugung und Gestaltung von Tkinter-Dialogen"""
