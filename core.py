@@ -36,7 +36,7 @@ def isDicom(fullpath):
         # print ex                                                                
     return isOk   
 
-def getFileFromDir(dirPath):                                                    
+def getFilesFromDir(dirPath):
     dirList = os.listdir(dirPath)                                               
     dcmFiles = {}                                           
     for fname in dirList:                                                       
