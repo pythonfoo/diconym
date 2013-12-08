@@ -1,10 +1,10 @@
 import os
 
-class whitelist(object):
+class WhiteList(object):
 	def __init__(self):
 		pass
 
-	def mainReadWhitelist(self,filename):
+	def mainReadWhiteList(self,filename):
 		filecontent = self.readFile(filename)
 		lines = self.readLine(filecontent)
 		lines = ignoreLinesSharp(lines)
