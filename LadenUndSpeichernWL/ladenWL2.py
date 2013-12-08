@@ -12,17 +12,17 @@ class WhiteList(object):
 		result = self.stringConverter(lines)
 		return result
 
-	def readFile(self,filename):
+	def _readFile(self,filename):
 		file1 = open(filename,'r')
 		result = file1.read()
 		file1.close()
 		return result
 
-	def readLine(self,filecontent):
+	def _readLine(self,filecontent):
 		result = filecontent.split('\n')
 		return result
 
-	def ignoreLinesSharp(self,lines):
+	def _ignoreLinesSharp(self,lines):
 		result = []
 		for line in lines:
 			if list(line)[0] == '#':
@@ -31,7 +31,7 @@ class WhiteList(object):
 				result.append(line)
 		return result
 
-	def ignoreLinesSpaces(self,lines):
+	def _ignoreLinesSpaces(self,lines):
 		result = []
 		tmpLine = ''
 		for line in lines:
@@ -44,7 +44,7 @@ class WhiteList(object):
 			tmpLine = ''
 		return result
 
-	def stringConverter(self,lines):
+	def _stringConverter(self,lines):
 		result = []
 		tmpPart1 = ''
 		tmpPart2 = ''
