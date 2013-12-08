@@ -21,3 +21,6 @@ class core():
 
 from future import
 * Whitelisteditor
+
+program
+http://c2s.ch/2c0b1117
