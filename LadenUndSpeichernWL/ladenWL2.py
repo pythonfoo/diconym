@@ -7,22 +7,22 @@ class WhiteList(object):
 	def mainReadWhiteList(self,filename):
 		filecontent = self.readFile(filename)
 		lines = self.readLine(filecontent)
-		lines = ignoreLinesSharp(lines)
-		lines = ignoreLinesSpaces(lines)
-		result = stringConverter(lines)
+		lines = self.ignoreLinesSharp(lines)
+		lines = self.ignoreLinesSpaces(lines)
+		result = self.stringConverter(lines)
 		return result
 
-	def readFile(self,filename):
+	def _readFile(self,filename):
 		file1 = open(filename,'r')
 		result = file1.read()
 		file1.close()
 		return result
 
-	def readLine(self,filecontent):
+	def _readLine(self,filecontent):
 		result = filecontent.split('\n')
 		return result
 
-	def ignoreLinesSharp(self,lines):
+	def _ignoreLinesSharp(self,lines):
 		result = []
 		for line in lines:
 			if list(line)[0] == '#':
@@ -31,7 +31,7 @@ class WhiteList(object):
 				result.append(line)
 		return result
 
-	def ignoreLinesSpaces(self,lines):
+	def _ignoreLinesSpaces(self,lines):
 		result = []
 		tmpLine = ''
 		for line in lines:
@@ -44,7 +44,7 @@ class WhiteList(object):
 			tmpLine = ''
 		return result
 
-	def stringConverter(self,lines):
+	def _stringConverter(self,lines):
 		result = []
 		tmpPart1 = ''
 		tmpPart2 = ''
@@ -62,9 +62,10 @@ class WhiteList(object):
 			path.append(str(fullpath+'/'+f))
 		return path
 		
-	def categoryListFiles(self,path):
-		folderContent = os.listdir(path)
+	def categoryListFiles(self,fullpath):
+		folderContent = os.listdir(fullpath)
 		content = {}
+		'''
 		for folder in folderContent:
 			tmpFolderContent = os.listdir(path + '/' + str(folder))
 			counter = 0
@@ -75,8 +76,19 @@ class WhiteList(object):
 				counter += 1
 					
 			content[folder] = tmpFolderContent
+		'''
 		
-			
-		print content
-wl = WhiteList()
-wl.categoryListFiles('/media/M3NT0R/Privat/Projekte/git/diconym/lists')
+		for folder in folderContent:
+			tmpFolderContent = os.listdir(fullpath + '/' + folder)
+			folderLength = len(tmpFolderContent)
+			for i in range(folderLength):
+				length = len(tmpFolderContent[i])
+				if '.txt' in tmpFolderContent[i] and length > 4:
+					tmpFolderContent[i] = tmpFolderContent[i][:-4]
+			content[folder] = tmpFolderContent
+		return content
+
+if __name__ == '__main__':
+	print 'Funktion wird aufgerufen'
+	wl = WhiteList()
+	wl.categoryListFiles('/media/M3NT0R/Privat/Projekte/git/diconym/lists')
