@@ -1,28 +1,28 @@
 import os
 
-class whitelist(object):
+class WhiteList(object):
 	def __init__(self):
 		pass
 
-	def main_Read_WL(self,filename):
-		filecontent = self.read_file(filename)
-		lines = self.read_line(filecontent)
-		lines = ignore_lines_sharp(lines)
-		lines = ignore_lines_spaces(lines)
-		result = string_converter(lines)
+	def mainReadWhiteList(self,filename):
+		filecontent = self.readFile(filename)
+		lines = self.readLine(filecontent)
+		lines = ignoreLinesSharp(lines)
+		lines = ignoreLinesSpaces(lines)
+		result = stringConverter(lines)
 		return result
 
-	def read_file(self,filename):
+	def readFile(self,filename):
 		file1 = open(filename,'r')
 		result = file1.read()
 		file1.close()
 		return result
 
-	def read_line(self,filecontent):
+	def readLine(self,filecontent):
 		result = filecontent.split('\n')
 		return result
 
-	def ignore_lines_sharp(self,lines):
+	def ignoreLinesSharp(self,lines):
 		result = []
 		for line in lines:
 			if list(line)[0] == '#':
@@ -31,7 +31,7 @@ class whitelist(object):
 				result.append(line)
 		return result
 
-	def ignore_lines_spaces(self,lines):
+	def ignoreLinesSpaces(self,lines):
 		result = []
 		tmpLine = ''
 		for line in lines:
@@ -44,7 +44,7 @@ class whitelist(object):
 			tmpLine = ''
 		return result
 
-	def string_converter(self,lines):
+	def stringConverter(self,lines):
 		result = []
 		tmpPart1 = ''
 		tmpPart2 = ''
@@ -55,7 +55,7 @@ class whitelist(object):
 			result.append((tmpPart1,tmpPart2))
 		return result	
 
-	def main_List_Dir(self,fullpath):
+	def mainListDir(self,fullpath):
 		directory = os.listdir(fullpath)
 		path = []
 		for f in directory:
