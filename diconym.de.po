@@ -40,7 +40,7 @@ msgstr "Start"
 
 #: diconymgraphics.py:49
 msgid ""
-"Diconym is a program to make Dicom files anonymous for science, education. "
+"DICOnyM is a program to make Dicom files anonymous for science, education. "
 "and more\n"
 "\n"
 "It's Free Software - you can redistribute it and/or modify it\n"
