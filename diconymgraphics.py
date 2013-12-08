@@ -34,7 +34,7 @@ class MainDialog(object):
 
 	def startdia(self):
 		sdia = DialogMaker()
-		stitle = _("Diconym - Makes Dicom files anonymous")
+		stitle = _("DICOnyM - Makes Dicom files anonymous")
 		sdia.title(stitle)
 
 		sdia.menu()
@@ -45,7 +45,7 @@ class MainDialog(object):
 
 		status = sdia.statusbar(_("Start"), 1, 0)
 
-		stext = _("""Diconym is a program to make Dicom files anonymous for science, education. and more\n
+		stext = _("""DICOnyM is a program to make Dicom files anonymous for science, education. and more\n
 It's Free Software - you can redistribute it and/or modify it\n
 under the terms of the GNU General Public License as published by\n
 the Free Software Foundation;\n
