@@ -21,14 +21,16 @@
 #       MA 02110-1301, USA.
 
 from Tkinter import *
-from tkMessageBox import *
+import tkMessageBox
 from tkFileDialog import *
+from gettextintegration import TranslationIntegration
 
 
 class DialogMaker(object):
 	"""Methoden zur Erzeugung und Gestaltung von Tkinter-Dialogen"""
 
 	def __init__(self):
+		ti = TranslationIntegration("tkdialogmaker")
 		"""Erzeugt Tkinter-Dialog und setzt Dialogtitel"""
 		self.dia=Tk()
 
@@ -50,7 +52,7 @@ class DialogMaker(object):
 
 	def endebutton(self, r, c):
 		"""Erzeugt den Button zum Beenden"""
-		eb = Button(self.dia, text = "Ende", fg="red", command = self.ende)
+		eb = Button(self.dia, text = _("End"), fg="red", command = self.ende)
 		eb.grid(row=r, column=c)
 
 	def ende(self):
@@ -107,11 +109,11 @@ class DialogMaker(object):
 		return sb
 
 	def fileOpenDialog(self):
-		filename = askopenfilename(filetypes = [('all files','*.*')],title ="Suche nach Dicom-Verzeichnissen")
+		filename = askopenfilename(filetypes = [('all files','*.*')],title =_("Search for Dicom directories"))
 		return(filename)
 		
 	def folderOpenDialog(self):
-		foldername = askdirectory(title ="Suche nach Dicom-Verzeichnissen")
+		foldername = askdirectory(title =_("Search for Dicom directories"))
 		return(foldername)
 
 	def statusbar(self, sbtext, r, c, cs=1):
@@ -135,7 +137,7 @@ class DialogMaker(object):
 		self.topmenu.add_separator()
 
 	def exitmenupoint(self):
-		self.topmenu.add_command(label="Exit", command=self.ende)
+		self.topmenu.add_command(label=_("Exit"), command=self.ende)
 
 
 def main():
