@@ -22,6 +22,9 @@
 
 # Begin gettext integration
 
+import locale
+import os
+
 class TranslationIntegration(object):
 	"""GNU-gettext for GNU/Linux"""
 
@@ -46,8 +49,8 @@ class TranslationIntegration(object):
 		else:
 			# Translating the following strings is absurd!
 			serror = "Bad package! No "+self.moname+" file found!"
-			from tkMessageBox import *
-			messagebox.showerror('Error!', serror)
+			import tkMessageBox
+			tkMessageBox.showerror('Error!', serror)
 			import sys; sys.exit(1)
 
 	def syslanguage(self):
