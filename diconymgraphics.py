@@ -24,15 +24,14 @@
 # In Debian muessen folgende Pakete zusaetzlich installiert werden:
 # -- python-tk
 
-<<<<<<< HEAD
 
 from Tkinter import *
 from tkMessageBox import *
 from tkFileDialog import *
-=======
+
 from UIelements.tkdialogmaker import DialogMaker
 from UIelements.gettextintegration import TranslationIntegration
->>>>>>> f67b901b05013ad53681d503a378eba0e244bb26
+
 import core
 import gettext
 
