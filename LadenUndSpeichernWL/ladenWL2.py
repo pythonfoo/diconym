@@ -86,12 +86,7 @@ class WhiteList(object):
 				if '.txt' in tmpFolderContent[i] and length > 4:
 					tmpFolderContent[i] = tmpFolderContent[i][:-4]
 			content[folder] = tmpFolderContent
-			
-		print content
-	
-	def main():
-		pass
+
 if __name__ == '__main__':
-	main()
-wl = WhiteList()
-wl.categoryListFiles('/media/M3NT0R/Privat/Projekte/git/diconym/lists')
+	wl = WhiteList()
+	wl.categoryListFiles('/media/M3NT0R/Privat/Projekte/git/diconym/lists')
