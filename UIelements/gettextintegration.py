@@ -24,6 +24,7 @@
 
 import locale
 import os
+import gettext
 
 class TranslationIntegration(object):
 	"""GNU-gettext for GNU/Linux"""

@@ -27,7 +27,6 @@ from UIelements.tkdialogmaker import DialogMaker
 from UIelements.gettextintegration import TranslationIntegration
 
 import core
-import gettext
 
 
 class MainDialog(object):
