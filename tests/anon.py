@@ -5,7 +5,10 @@ import sys
 import os
 fPath = os.path.abspath(__file__)
 path, filename = os.path.split(fPath)
-sys.path.append(path)
+print 'fPath', fPath
+print 'path', path
+print 'f', os.path.split(path)[0] #os.path.join(path, 'tests')
+sys.path.append(os.path.split(path)[0])
 
 #from .. import core
 from LadenUndSpeichernWL  import ladenWL2 as lW
