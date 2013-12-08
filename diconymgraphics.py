@@ -75,14 +75,15 @@ or (at your option) any later version.""")
 
 	def choosedir(self):
 		foldername = self.ended.folderOpenDialog()
-		self.endedia()
-		self.filelistdia(foldername)
+		if foldername != "" and type(foldername) == str:
+			self.filelistdia(foldername)
 
 	def filelistdia(self, foldername):
 		"""Second dialog"""
 		allFiles = core.getFilesFromDir(foldername)
 
 		if allFiles != {}:
+			self.endedia()
 			longestFullPath = self.getMaxLenFromList(allFiles.keys())
 			longestFileName = self.getMaxLenFromList(allFiles.values())
 			sumLineLen = longestFullPath + longestFileName + 4
@@ -102,9 +103,7 @@ or (at your option) any later version.""")
 		else:
 			stitle = _("Nothing found!")
 			stext = _("No dicom files found")
-			wmb = DialogMaker()
-			wmb.mwarning(stitle, stext)
-			self.ended = wmb
+			self.sdia.mwarning(stitle, stext)
 			self.choosedir()
 
 	def getMaxLenFromList(self, lst):
