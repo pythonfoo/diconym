@@ -17,13 +17,18 @@ class Multilistbox(Frame):
     lists = Inherits the Header Config Tuple ( Name as String , width as Int )
 
     """
-    def __init__(self, master):  # old: ,lists)
+    def __init__(self, master, **args):  # old: ,lists)
         """
 
         """
         self._master = None
         self.master = master
         self._labellist = {}
+        self._text = "default"
+        if "name" in args:
+            if isinstance(args["name"], str):
+                self._text = args["name"]
+
         # self.show(self.master, lists)
 
 
@@ -42,16 +47,15 @@ class Multilistbox(Frame):
         else:
             raise TypeError
 
-    def show(self): # old:  master , lists)
+    def show(self):
         master = self.master
         Frame.__init__(self, master)
         self.lists = []
-        # old: for l,w in lists:
         sortedlabellist = self._get_sorted_labellist()
         for label in sortedlabellist:
             frame = Frame(self)
             frame.pack(side=LEFT, expand=YES, fill=BOTH)
-            Label(frame, text=label.text, borderwidth=1, relief=RAISED).pack(fill=X)
+            Label(frame, text=label.text, borderwidth=1, relief=RAISED, fg=label.text_color, bg=label.header_color).pack(fill=X)
                                         # TODO config Property borderwith, relief
             lb = Listbox(frame, width=label.width, borderwidth=0, selectborderwidth=0,
                  relief=FLAT, exportselection=FALSE)
@@ -82,10 +86,8 @@ class Multilistbox(Frame):
         """
         returns a List of Multilistbox_label Objects sorted by Position
         """
-
         self._labelkeylist = []
         for label in self._labellist.values():
-            # sorted(unsorted, key=lambda element: (element[1], element[2]))
             self._labelkeylist.append((label.name, label.position))
 
         sorted_labelkeylist=sorted( self._labelkeylist, key=lambda position: position[1])
@@ -179,8 +181,8 @@ class Multilistbox_label(object):
         # private Properties pleas do not use them
         self._name = ""
         self._text = ""
-        self._text_colour = "default"
-        self._header_colour = "default"
+        self._text_color = "black"
+        self._header_color = "grey"
         self._is_filter = False
         self._width = 10
         self._position = 1
@@ -219,24 +221,24 @@ class Multilistbox_label(object):
 
 
     @property
-    def text_colour(self):
-        return self._text_colour
+    def text_color(self):
+        return self._text_color
 
-    @text_colour.setter
-    def text_colour(self, value):
-        if isinstance(value, str): # TODO Colour Type Proof
-            self._text_colour = value
+    @text_color.setter
+    def text_color(self, value):
+        if isinstance(value, str): # TODO Color Type Proof
+            self._text_color = value
         else:
             raise TypeError
 
     @property
-    def header_colour(self):
-        return self._header_colour
+    def header_color(self):
+        return self._header_color
 
-    @header_colour.setter
-    def header_colour(self, value):
+    @header_color.setter
+    def header_color(self, value):
         if isinstance(value, str):
-            self._header_colour = value
+            self._header_color = value
         else:
             raise TypeError
 
@@ -283,6 +285,9 @@ if __name__ == '__main__':
     label1.position = 1
     label1.width = 40
     label1.text = "Subject"
+    label1.header_color = "red"
+    label1.text_color = "blue"
+    label1.is_filter = True
     mlb.append_label(label1)
 
     label2 = Multilistbox_label("label2")
@@ -303,7 +308,7 @@ if __name__ == '__main__':
     label4.text = "User"
     mlb.append_label(label4)
     mlb.show()
-    # mlb = Multilistbox(tk, (('Subject', 40), ('Sender', 20), ('Date', 10), ('Oerb', 30))) # TODO: Dynamische Laenge Spalten pruefen
+    # TODO: Dynamische Laenge Spalten pruefen
     for i in range(1000):
         mlb.insert(END, ('Important Message: %d' % i, 'John Doe', '10/10/%04d' % (1900+i),'by Oerb'))
     mlb.pack(expand=YES,fill=BOTH)
