@@ -81,24 +81,34 @@ or (at your option) any later version.""")
 	def filelistdia(self, foldername):
 		"""Second dialog"""
 		allFiles = core.getFilesFromDir(foldername)
-		print(allFiles)
-		longestFullPath = self.getMaxLenFromList(allFiles.keys())
-		longestFileName = self.getMaxLenFromList(allFiles.values())
-		sumLineLen = longestFullPath + longestFileName + 4
+
+		if allFiles != {}:
+			print(allFiles)
+			longestFullPath = self.getMaxLenFromList(allFiles.keys())
+			longestFileName = self.getMaxLenFromList(allFiles.values())
+			sumLineLen = longestFullPath + longestFileName + 4
 
 
-		finalStringList = []
-		for k in allFiles.keys():
-			finalStringList.append("{k:{lFullPath}} | {val:{lFileName}}".format(k=k, lFullPath=longestFullPath,
+			finalStringList = []
+			for k in allFiles.keys():
+				finalStringList.append("{k:{lFullPath}} | {val:{lFileName}}".format(k=k, lFullPath=longestFullPath,
 																			val=allFiles[k], lFileName=longestFileName))
 
-		stitle = _("DICOnyM - Makes Dicom files anonymous")
+			stitle = _("DICOnyM - Makes Dicom files anonymous")
 
-		sstatustext = "File list"
-		self.dialogframe(stitle, sstatustext)
-		self.sdia.listbox(finalStringList, sumLineLen, 0, 0)
+			sstatustext = "File list"
+			self.dialogframe(stitle, sstatustext)
+			self.sdia.tablelistbox(finalStringList, sumLineLen, 0, 0)
+			self.ended = self.sdia
+			self.sdia.mainloop()
 
-		self.sdia.mainloop()
+		else:
+			stitle = _("Nothing found!")
+			stext = _("No dicom files found")
+			wmb = DialogMaker()
+			wmb.mwarning(stitle, stext)
+			self.ended = wmb
+			self.choosedir()
 
 	def getMaxLenFromList(self, lst):
 		longest = 0
