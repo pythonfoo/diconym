@@ -71,7 +71,7 @@ or (at your option) any later version.""")
 		"""Dialog zum Setzen der Einstellungen"""
 		self.endedia()
 		
-		print "hier"
+		print("hier")
 
 	def choosedir(self):
 		foldername = self.ended.folderOpenDialog()
