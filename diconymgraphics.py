@@ -83,12 +83,9 @@ or (at your option) any later version.""")
 		allFiles = core.getFilesFromDir(foldername)
 
 		if allFiles != {}:
-			print(allFiles)
 			longestFullPath = self.getMaxLenFromList(allFiles.keys())
 			longestFileName = self.getMaxLenFromList(allFiles.values())
 			sumLineLen = longestFullPath + longestFileName + 4
-
-
 			finalStringList = []
 			for k in allFiles.keys():
 				finalStringList.append("{k:{lFullPath}} | {val:{lFileName}}".format(k=k, lFullPath=longestFullPath,
