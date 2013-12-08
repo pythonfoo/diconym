@@ -62,8 +62,8 @@ class WhiteList(object):
 			path.append(str(fullpath+'/'+f))
 		return path
 		
-	def categoryListFiles(self,path):
-		folderContent = os.listdir(path)
+	def categoryListFiles(self,fullpath):
+		folderContent = os.listdir(fullpath)
 		content = {}
 		'''
 		for folder in folderContent:
@@ -79,14 +79,16 @@ class WhiteList(object):
 		'''
 		
 		for folder in folderContent:
-			tmpFolderContent = os.listdir(path + '/' + folder)
+			tmpFolderContent = os.listdir(fullpath + '/' + folder)
 			folderLength = len(tmpFolderContent)
 			for i in range(folderLength):
 				length = len(tmpFolderContent[i])
 				if '.txt' in tmpFolderContent[i] and length > 4:
 					tmpFolderContent[i] = tmpFolderContent[i][:-4]
 			content[folder] = tmpFolderContent
+		return content
 
 if __name__ == '__main__':
+	print 'Funktion wird aufgerufen'
 	wl = WhiteList()
 	wl.categoryListFiles('/media/M3NT0R/Privat/Projekte/git/diconym/lists')
