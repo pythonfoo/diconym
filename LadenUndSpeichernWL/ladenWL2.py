@@ -88,5 +88,10 @@ class WhiteList(object):
 			content[folder] = tmpFolderContent
 			
 		print content
+	
+	def main():
+		pass
+if __name__ == '__main__':
+	main()
 wl = WhiteList()
 wl.categoryListFiles('/media/M3NT0R/Privat/Projekte/git/diconym/lists')
