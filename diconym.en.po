@@ -1,0 +1,67 @@
+# German translations for PACKAGE package
+# German messages for PACKAGE.
+# Copyright (C) 2013 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Mechtilde <ooo@mechtilde.de>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: diconymgraphics\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-08 16:47+0100\n"
+"PO-Revision-Date: 2013-12-08 16:48+0100\n"
+"Last-Translator: Mechtilde <ooo@mechtilde.de>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: diconymgraphics.py:38
+msgid "Diconym - Makes Dicom files anonymous"
+msgstr "Diconym - Makes Dicom files anonymous"
+
+#: diconymgraphics.py:42
+msgid "Tasks"
+msgstr "Tasks"
+
+#: diconymgraphics.py:43
+msgid "Choice directory..."
+msgstr "Choice directory..."
+
+#: diconymgraphics.py:44
+msgid "Settings ..."
+msgstr "Settings..."
+
+#: diconymgraphics.py:47
+msgid "Start"
+msgstr "Start"
+
+#: diconymgraphics.py:49
+msgid ""
+"Diconym is a program to make Dicom files anonymous for science, education. "
+"and more\n"
+"\n"
+"It's Free Software - you can redistribute it and/or modify it\n"
+"\n"
+"under the terms of the GNU General Public License as published by\n"
+"\n"
+"the Free Software Foundation;\n"
+"\n"
+"either version 3 of the License,\n"
+"\n"
+"or (at your option) any later version."
+msgstr ""
+"Diconym is a program to make Dicom files anonymous for science, education. "
+"and more\n"
+"\n"
+"It's Free Software - you can redistribute it and/or modify it\n"
+"\n"
+"under the terms of the GNU General Public License as published by\n"
+"\n"
+"the Free Software Foundation;\n"
+"\n"
+"either version 3 of the License,\n"
+"\n"
+"or (at your option) any later version."
