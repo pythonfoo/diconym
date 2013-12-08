@@ -1,15 +1,61 @@
 __author__ = 'oerb'
+"""
+inspired by
+http://code.activestate.com/recipes/52266-multilistbox-tkinter-widget/
+
+a MultiListBox with Filter
+"""
 from Tkinter import *
 
-class MultiListbox(Frame):
-    def __init__(self, master, lists):
+class Multilistbox(Frame):
+    """
+    tkInter MultiListBox
+
+
+    takes two Arguments:
+    master = Tkinter.Tk  Main Window/Widget
+    lists = Inherits the Header Config Tuple ( Name as String , width as Int )
+
+    """
+    def __init__(self, master):  # old: ,lists)
+        """
+
+        """
+        self._master = None
+        self.master = master
+        self._labellist = {}
+        # self.show(self.master, lists)
+
+
+    @property
+    def master(self):
+        # Type Tkinter.Tk
+        if self._master:
+            return self._master
+        else:
+            raise AttributeError
+
+    @master.setter
+    def master(self, value):
+        if isinstance(value, Tk):
+            self._master = value
+        else:
+            raise TypeError
+
+    def show(self): # old:  master , lists)
+        master = self.master
         Frame.__init__(self, master)
         self.lists = []
-        for l,w in lists:
-            frame = Frame(self); frame.pack(side=LEFT, expand=YES, fill=BOTH)
-            Label(frame, text=l, borderwidth=1, relief=RAISED).pack(fill=X)
-            lb = Listbox(frame, width=w, borderwidth=0, selectborderwidth=0,
+        # old: for l,w in lists:
+        sortedlabellist = self._get_sorted_labellist()
+        for label in sortedlabellist:
+            frame = Frame(self)
+            frame.pack(side=LEFT, expand=YES, fill=BOTH)
+            Label(frame, text=label.text, borderwidth=1, relief=RAISED).pack(fill=X)
+                                        # TODO config Property borderwith, relief
+            lb = Listbox(frame, width=label.width, borderwidth=0, selectborderwidth=0,
                  relief=FLAT, exportselection=FALSE)
+                                        # TODO config Property borderwidth, selectborderwidth, relief, exportselection
             lb.pack(expand=YES, fill=BOTH)
             self.lists.append(lb)
             lb.bind('<B1-Motion>', lambda e, s=self: s._select(e.y))
@@ -22,6 +68,35 @@ class MultiListbox(Frame):
         sb = Scrollbar(frame, orient=VERTICAL, command=self._scroll)
         sb.pack(expand=YES, fill=Y)
         self.lists[0]['yscrollcommand']=sb.set
+
+    def append_label(self, multilistbox_label):
+        """
+        Mulitlistbox_label has to be instantiated
+        """
+        if isinstance(multilistbox_label, Multilistbox_label):
+            self._labellist[multilistbox_label.name]=multilistbox_label
+        else:
+            raise TypeError
+
+    def _get_sorted_labellist(self):
+        """
+        returns a List of Multilistbox_label Objects sorted by Position
+        """
+
+        self._labelkeylist = []
+        for label in self._labellist.values():
+            # sorted(unsorted, key=lambda element: (element[1], element[2]))
+            self._labelkeylist.append((label.name, label.position))
+
+        sorted_labelkeylist=sorted( self._labelkeylist, key=lambda position: position[1])
+        sortedlist = [] # sorted list of Multilistbox_label Objects
+
+        for label in sorted_labelkeylist:
+            sortedlist.append(self._labellist[label[0]])
+
+        return sortedlist
+
+
 
     def _select(self, y):
         row = self.lists[0].nearest(y)
@@ -87,11 +162,153 @@ class MultiListbox(Frame):
         for l in self.lists:
             l.selection_set(first, last)
 
+
+class Multilistbox_label(object):
+    """
+    Define a Label for Mulitlistbox
+
+    @name = Tablefield Name
+    @text = Label Text
+    @text_colour = set Text Colour
+    @header_colour = set Label Colour
+    @is_filter = set Lable as Filterbutton
+    @width = set width
+    @position = set Position
+    """
+    def __init__(self, labelname):
+        # private Properties pleas do not use them
+        self._name = ""
+        self._text = ""
+        self._text_colour = "default"
+        self._header_colour = "default"
+        self._is_filter = False
+        self._width = 10
+        self._position = 1
+        # set Name
+        self.name = labelname
+
+        # TODO: Textbase Filter above Header as Inputboxes
+
+    @property
+    def name(self):
+        if self._name:
+            return self._name
+        else:
+            raise NameError
+
+    @name.setter
+    def name(self, value):
+        if isinstance(value, str):
+            self._name = value
+        else:
+            raise TypeError
+
+    @property
+    def text(self):
+        if self._text:
+            return self._text
+        else:
+            raise NameError
+
+    @text.setter
+    def text(self, value):
+        if isinstance(value, str):
+            self._text = value
+        else:
+            raise TypeError
+
+
+    @property
+    def text_colour(self):
+        return self._text_colour
+
+    @text_colour.setter
+    def text_colour(self, value):
+        if isinstance(value, str): # TODO Colour Type Proof
+            self._text_colour = value
+        else:
+            raise TypeError
+
+    @property
+    def header_colour(self):
+        return self._header_colour
+
+    @header_colour.setter
+    def header_colour(self, value):
+        if isinstance(value, str):
+            self._header_colour = value
+        else:
+            raise TypeError
+
+    @property
+    def is_filter(self):
+        return self._is_filter
+
+    @is_filter.setter
+    def is_filter(self, value):
+        if isinstance(value, bool):
+            self._is_filter = value
+        else:
+            raise TypeError
+
+    @property
+    def width(self):
+        return self._width
+
+    @width.setter
+    def width(self, value):
+        if isinstance(value, int):
+            self._width = value
+        else:
+            raise TypeError
+
+    @property
+    def position(self):
+        return self._position
+
+    @position.setter
+    def position(self, value):
+        if isinstance(value, int):
+            self._position = value
+        else:
+            raise TabError
+
 if __name__ == '__main__':
     tk = Tk()
     Label(tk, text='MultiListbox_by_Oerb').pack()
-    mlb = MultiListbox(tk, (('Subject', 40), ('Sender', 20), ('Date', 10)))
+
+    mlb = Multilistbox(tk) # instantiate Multilistbox
+    # define the Header Label
+    label1 = Multilistbox_label("label1")
+    label1.position = 1
+    label1.width = 40
+    label1.text = "Subject"
+    mlb.append_label(label1)
+
+    label2 = Multilistbox_label("label2")
+    label2.position = 2
+    label2.width = 20
+    label2.text = "Sender"
+    mlb.append_label(label2)
+
+    label3 = Multilistbox_label("label3")
+    label3.position = 3
+    label3.width = 10
+    label3.text = "Date"
+    mlb.append_label(label3)
+
+    label4 = Multilistbox_label("label4")
+    label4.position = 4
+    label4.width = 30
+    label4.text = "User"
+    mlb.append_label(label4)
+    mlb.show()
+    # mlb = Multilistbox(tk, (('Subject', 40), ('Sender', 20), ('Date', 10), ('Oerb', 30))) # TODO: Dynamische Laenge Spalten pruefen
     for i in range(1000):
-        mlb.insert(END, ('Important Message: %d' % i, 'John Doe', '10/10/%04d' % (1900+i)))
+        mlb.insert(END, ('Important Message: %d' % i, 'John Doe', '10/10/%04d' % (1900+i),'by Oerb'))
     mlb.pack(expand=YES,fill=BOTH)
     tk.mainloop()
+
+# TODO: Lable needs: Image, Filter Files
+# TODO: List needs Stripes so it needs something for Colours
+# TODO: List needs coloured character
