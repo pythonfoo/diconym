@@ -47,15 +47,24 @@ class Multilistbox(Frame):
         else:
             raise TypeError
 
+    def do(self,t,e):
+        # Helper for development
+        print("klick", t, e)
+
     def show(self):
         master = self.master
         Frame.__init__(self, master)
         self.lists = []
         sortedlabellist = self._get_sorted_labellist()
+
         for label in sortedlabellist:
             frame = Frame(self)
             frame.pack(side=LEFT, expand=YES, fill=BOTH)
-            Label(frame, text=label.text, borderwidth=1, relief=RAISED, fg=label.text_color, bg=label.header_color).pack(fill=X)
+            headlabel = Label(frame, text=label.text, borderwidth=1, relief=RAISED, fg=label.text_color
+                , bg=label.header_color)
+            headlabel.bind('<Button-1>', lambda e, s=self: s._select_head(e.x, e.y)) # TODO: Klick on Label is just in Last !!!!!!!!!
+            # TODO: GO ON Here Oerb.....
+            headlabel.pack(fill=X)
                                         # TODO config Property borderwith, relief
             lb = Listbox(frame, width=label.width, borderwidth=0, selectborderwidth=0,
                  relief=FLAT, exportselection=FALSE)
@@ -72,6 +81,9 @@ class Multilistbox(Frame):
         sb = Scrollbar(frame, orient=VERTICAL, command=self._scroll)
         sb.pack(expand=YES, fill=Y)
         self.lists[0]['yscrollcommand']=sb.set
+
+    def _filter(self):
+        self.delete(0,len(list))
 
     def append_label(self, multilistbox_label):
         """
@@ -98,7 +110,11 @@ class Multilistbox(Frame):
 
         return sortedlist
 
-
+    def _select_head(self, x, y):
+        for l in self.lists:
+            l.scan_mark(x, y)
+            print (x,y)
+        return 'break'
 
     def _select(self, y):
         row = self.lists[0].nearest(y)
@@ -309,7 +325,7 @@ if __name__ == '__main__':
     mlb.append_label(label4)
     mlb.show()
     # TODO: Dynamische Laenge Spalten pruefen
-    for i in range(1000):
+    for i in range(5):
         mlb.insert(END, ('Important Message: %d' % i, 'John Doe', '10/10/%04d' % (1900+i),'by Oerb'))
     mlb.pack(expand=YES,fill=BOTH)
     tk.mainloop()
