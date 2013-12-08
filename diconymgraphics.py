@@ -4,6 +4,7 @@
 #       diconymgraphics.py
 #       
 #       Copyright 2013 Michael Stehmann <info@rechtsanwalt-stehmann.de>
+#       Copyright (C) 2013 for the gettext integration: Mechtilde Stehmann <ooo@mechtilde.de
 #       
 #       This program is free software; you can redistribute it and/or modify
 #       it under the terms of the GNU General Public License as published by
@@ -23,9 +24,17 @@
 # In Debian muessen folgende Pakete zusaetzlich installiert werden:
 # -- python-tk
 
+<<<<<<< HEAD
+
+from Tkinter import *
+from tkMessageBox import *
+from tkFileDialog import *
+=======
 from UIelements.tkdialogmaker import DialogMaker
 from UIelements.gettextintegration import TranslationIntegration
+>>>>>>> f67b901b05013ad53681d503a378eba0e244bb26
 import core
+import gettext
 
 
 class MainDialog(object):
