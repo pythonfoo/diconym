@@ -7,9 +7,9 @@ class WhiteList(object):
 	def mainReadWhiteList(self,filename):
 		filecontent = self.readFile(filename)
 		lines = self.readLine(filecontent)
-		lines = ignoreLinesSharp(lines)
-		lines = ignoreLinesSpaces(lines)
-		result = stringConverter(lines)
+		lines = self.ignoreLinesSharp(lines)
+		lines = self.ignoreLinesSpaces(lines)
+		result = self.stringConverter(lines)
 		return result
 
 	def readFile(self,filename):
@@ -65,6 +65,7 @@ class WhiteList(object):
 	def categoryListFiles(self,path):
 		folderContent = os.listdir(path)
 		content = {}
+		'''
 		for folder in folderContent:
 			tmpFolderContent = os.listdir(path + '/' + str(folder))
 			counter = 0
@@ -75,7 +76,16 @@ class WhiteList(object):
 				counter += 1
 					
 			content[folder] = tmpFolderContent
+		'''
 		
+		for folder in folderContent:
+			tmpFolderContent = os.listdir(path + '/' + folder)
+			folderLength = len(tmpFolderContent)
+			for i in range(folderLength):
+				length = len(tmpFolderContent[i])
+				if '.txt' in tmpFolderContent[i] and length > 4:
+					tmpFolderContent[i] = tmpFolderContent[i][:-4]
+			content[folder] = tmpFolderContent
 			
 		print content
 wl = WhiteList()
