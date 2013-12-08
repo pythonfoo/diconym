@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-#       diconymgraphics.py
+#       Tk-Liste-Test.py
 #       
 #       Copyright 2013 Michael Stehmann <info@rechtsanwalt-stehmann.de>
 #       

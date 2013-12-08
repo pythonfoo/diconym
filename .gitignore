@@ -44,3 +44,7 @@ nosetests.xml
 
 # tempfile
 *~
+
+# binarys
+*.exe
+*.msi

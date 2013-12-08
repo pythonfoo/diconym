@@ -1,8 +1,8 @@
-# German translations for PACKAGE package
-# German messages for PACKAGE.
-# Copyright (C) 2013 THE PACKAGE'S COPYRIGHT HOLDER
+# German translations for DICOnyM
+# German messages for DICOnyM.diconymgraphics.py
+# Copyright (C) 2013 Mechtilde Stehmann <ooo@mechtilde.de>
 # This file is distributed under the same license as the PACKAGE package.
-# Mechtilde <ooo@mechtilde.de>, 2013.
+# Mechtilde Stehmann <ooo@mechtilde.de>, 2013.
 #
 msgid ""
 msgstr ""
@@ -19,8 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: diconymgraphics.py:38
-msgid "Diconym - Makes Dicom files anonymous"
-msgstr "Diconym - Anonymisiert Dicom Dateien"
+msgid "DICOnyM - Makes Dicom files anonymous"
+msgstr "DICOnyM - Anonymisiert Dicom Dateien"
 
 #: diconymgraphics.py:42
 msgid "Tasks"
@@ -53,7 +53,7 @@ msgid ""
 "\n"
 "or (at your option) any later version."
 msgstr ""
-"Diconym ist ein Programm Dicom Dateien für Wissenschaft, Forschung und Lehre. \n"
+"DICOnyM ist ein Programm Dicom Dateien für Wissenschaft, Forschung und Lehre. \n"
 "\n"
 "Es ist freie Software - Sie können es weitervertreiben und/oder es verändern\n"
 "\n"

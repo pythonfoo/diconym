@@ -21,14 +21,18 @@
 #       MA 02110-1301, USA.
 
 from Tkinter import *
-from tkMessageBox import *
+import tkMessageBox
 from tkFileDialog import *
+from tkFont import *
+import os
+from gettextintegration import TranslationIntegration
 
 
 class DialogMaker(object):
 	"""Methoden zur Erzeugung und Gestaltung von Tkinter-Dialogen"""
 
 	def __init__(self):
+		ti = TranslationIntegration("tkdialogmaker")
 		"""Erzeugt Tkinter-Dialog und setzt Dialogtitel"""
 		self.dia=Tk()
 
@@ -50,7 +54,7 @@ class DialogMaker(object):
 
 	def endebutton(self, r, c):
 		"""Erzeugt den Button zum Beenden"""
-		eb = Button(self.dia, text = "Ende", fg="red", command = self.ende)
+		eb = Button(self.dia, text = _("End"), fg="red", command = self.ende)
 		eb.grid(row=r, column=c)
 
 	def ende(self):
@@ -76,6 +80,17 @@ class DialogMaker(object):
 		self.listbox.grid(row=r, column=c, padx=5)
 		return self.listbox
 
+	def tablelistbox(self, liste, w, r, c):
+		"""Erzeugt ein Listenfeld"""
+		self.listbox = Listbox(self.dia, width=w)
+		_fontl = Font(family='Courier', size=10, underline=1)
+		self.listbox.config(font=_fontl)
+		#self.listbox.config(font=('Courier 10 Pitch', 10))
+		for i in range(0,len(liste)):
+			self.listbox.insert("end", "  "+liste[i])
+		self.listbox.grid(row=r, column=c, padx=5)
+		return self.listbox
+
 	def auswahl(self, listbox):
 		"""Stellt die im Listenfeld des Dialoges gewaehlte Auswahl fest"""
 		auswahl=listbox.get("active").strip()
@@ -95,23 +110,23 @@ class DialogMaker(object):
 		return e
 
 	def minfo(self, mbtitle, mbtext, btype="ok"):
-		sb = messagebox.showinfo(mbtitle, mbtext, type=btype)
+		sb = tkMessageBox.showinfo(mbtitle, mbtext, type=btype)
 		return sb
 
 	def mwarning(self, mbtitle, mbtext, btype="ok"):
-		sb = messagebox.showwarning(mbtitle, mbtext, type=btype)
+		sb = tkMessageBox.showwarning(mbtitle, mbtext, type=btype)
 		return sb
 
 	def merror(self, mbtitle, mbtext, btype="ok"):
-		sb = messagebox.showerror(mbtitle, mbtext, type=btype)
+		sb = tkMessageBox.showerror(mbtitle, mbtext, type=btype)
 		return sb
 
 	def fileOpenDialog(self):
-		filename = askopenfilename(filetypes = [('all files','*.*')],title ="Suche nach Dicom-Verzeichnissen")
+		filename = askopenfilename(filetypes = [('all files','*.*')],title =_("Search for Dicom directories"))
 		return(filename)
 		
 	def folderOpenDialog(self):
-		foldername = askdirectory(title ="Suche nach Dicom-Verzeichnissen")
+		foldername = askdirectory(title =_("Search for Dicom directories"))
 		return(foldername)
 
 	def statusbar(self, sbtext, r, c, cs=1):
@@ -135,7 +150,7 @@ class DialogMaker(object):
 		self.topmenu.add_separator()
 
 	def exitmenupoint(self):
-		self.topmenu.add_command(label="Exit", command=self.ende)
+		self.topmenu.add_command(label=_("Exit"), command=self.ende)
 
 
 def main():
