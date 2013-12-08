@@ -1,0 +1,31 @@
+# German translations for DICOnyM
+# German messages for DICOnyM.tkdialogmaker.py
+# Copyright (C) 2013 Mechtilde Stehmann <ooo@mechtilde.de>
+# This file is distributed under the same license as the PACKAGE package.
+# Mechtilde Stehmann <ooo@mechtilde.de>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DICOnyM\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-08 18:03+0100\n"
+"PO-Revision-Date: 2013-12-08 18:04+0100\n"
+"Last-Translator: Mechtilde Stehmann <ooo@mechtilde.de>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: tkdialogmaker.py:55
+msgid "End"
+msgstr "Ende"
+
+#: tkdialogmaker.py:112 tkdialogmaker.py:116
+msgid "Search for Dicom directories"
+msgstr "Sucht nach Dicom Verzeichnisse"
+
+#: tkdialogmaker.py:140
+msgid "Exit"
+msgstr "Ausgang"
