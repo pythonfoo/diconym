@@ -76,7 +76,7 @@ or (at your option) any later version.""")
 
 def main():
 
-	# ti = TranslationIntegration("diconym")
+	ti = TranslationIntegration("diconym")
 	start = MainDialog()
 	start.startdia()
 
