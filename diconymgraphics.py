@@ -4,7 +4,6 @@
 #       diconymgraphics.py
 #       
 #       Copyright 2013 Michael Stehmann <info@rechtsanwalt-stehmann.de>
-#       Copyright (C) 2013 for the gettext integration: Mechtilde Stehmann <ooo@mechtilde.de
 #       
 #       This program is free software; you can redistribute it and/or modify
 #       it under the terms of the GNU General Public License as published by
@@ -24,11 +23,6 @@
 # In Debian muessen folgende Pakete zusaetzlich installiert werden:
 # -- python-tk
 
-
-from Tkinter import *
-from tkMessageBox import *
-from tkFileDialog import *
-
 from UIelements.tkdialogmaker import DialogMaker
 from UIelements.gettextintegration import TranslationIntegration
 
@@ -41,23 +35,23 @@ class MainDialog(object):
 
 	def startdia(self):
 		sdia = DialogMaker()
-		stitle = "Diconym - Makes Dicom files anonymous"
+		stitle = _("Diconym - Makes Dicom files anonymous")
 		sdia.title(stitle)
 
 		sdia.menu()
-		sdia.topmenu("Tasks")
-		sdia.menuentry("Choice directory...", self.choosedir)
-		sdia.menuentry("Settings ...", self.settingsdia)
+		sdia.topmenu(_("Tasks"))
+		sdia.menuentry(_("Choice directory..."), self.choosedir)
+		sdia.menuentry(_("Settings ..."), self.settingsdia)
 		sdia.exitmenupoint()
 
-		status = sdia.statusbar("Start", 1, 0)
+		status = sdia.statusbar(_("Start"), 1, 0)
 
-		stext = """Diconym is a program to make Dicom files anonymous for science, education. and more\n
+		stext = _("""Diconym is a program to make Dicom files anonymous for science, education. and more\n
 It's Free Software - you can redistribute it and/or modify it\n
 under the terms of the GNU General Public License as published by\n
 the Free Software Foundation;\n
 either version 3 of the License,\n
-or (at your option) any later version."""
+or (at your option) any later version.""")
 
 		sdia.label(stext, 120,  0, 0, "yellow")
 		self.ended = sdia
