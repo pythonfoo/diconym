@@ -32,7 +32,7 @@ import core
 class MainDialog(object):
 	"""Erzeugt den Hauptdialog"""
 
-	def dialogframe(self, title, statustext):
+	def dialogframe(self, title, statustext, c=1, cs=1):
 		"""Common elemts for dialogs"""
 		self.sdia = DialogMaker()
 		self.sdia.title(title)
@@ -42,14 +42,16 @@ class MainDialog(object):
 		self.sdia.taskmenuentry(_("Settings ..."), self.settingsdia)
 		self.sdia.exitmenupoint()
 
-		status = self.sdia.statusbar(_(statustext), 1, 0)
+		status = self.sdia.statusbar(statustext, c, 0, cs)
 
 	def startdia(self):
 		"""First dialog"""
 		stitle = _("DICOnyM - Makes Dicom files anonymous")
 
 		sstatustext = "Start"
-		self.dialogframe(stitle, sstatustext)
+		self.dialogframe(stitle, sstatustext, 2, 2)
+
+		self.sdia.bilderfeld("UIelements/diconym_logo.gif", 350, 350, 0, 0)
 
 		stext = _("""DICOnyM is a program to make Dicom files anonymous for science, education and more\n
 It's Free Software - you can redistribute it and/or modify it\n
@@ -58,7 +60,7 @@ the Free Software Foundation;\n
 either version 3 of the License,\n
 or (at your option) any later version.""")
 
-		self.sdia.label(stext, 120,  0, 0, "yellow")
+		self.sdia.label(stext, 100,  0, 1, "yellow")
 		self.ended = self.sdia
 		self.sdia.mainloop()
 
