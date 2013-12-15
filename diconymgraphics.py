@@ -37,9 +37,9 @@ class MainDialog(object):
 		self.sdia = DialogMaker()
 		self.sdia.title(title)
 		self.sdia.menu()
-		self.sdia.topmenu(_("Tasks"))
-		self.sdia.menuentry(_("Choice directory..."), self.choosedir)
-		self.sdia.menuentry(_("Settings ..."), self.settingsdia)
+		self.sdia.taskmenu(_("Tasks"))
+		self.sdia.taskmenuentry(_("Choose directory..."), self.choosedir)
+		self.sdia.taskmenuentry(_("Settings ..."), self.settingsdia)
 		self.sdia.exitmenupoint()
 
 		status = self.sdia.statusbar(_(statustext), 1, 0)
@@ -93,10 +93,19 @@ or (at your option) any later version.""")
 																			val=allFiles[k], lFileName=longestFileName))
 
 			stitle = _("DICOnyM - Makes Dicom files anonymous")
+			sstatustext = _("File list")
 
-			sstatustext = "File list"
+			h = len(finalStringList)
+			maxh = False # Listbox ohne Scrollbar
+			mh = 10 # kann evt. hoeher gesetzt werden
+			if h > mh: 
+				h = mh
+				maxh = True # Listbox mit Scrollbar
 			self.dialogframe(stitle, sstatustext)
-			self.sdia.tablelistbox(finalStringList, sumLineLen, 0, 0)
+			self.sdia.tablelistbox(finalStringList, sumLineLen, h, 0, 0, maxh)
+
+			self.sdia.editmenu(_("Edit"))
+			self.sdia.editmenuentry(_("Choose selected files"), self.selectedfiles)
 			self.ended = self.sdia
 			self.sdia.mainloop()
 
@@ -105,6 +114,17 @@ or (at your option) any later version.""")
 			stext = _("No dicom files found")
 			self.sdia.mwarning(stitle, stext)
 			self.choosedir()
+
+	def selectedfiles(self):
+		sfl = self.sdia.mehrfachauswahl(self.sdia.listbox)
+		selectedfileslist = []
+		sep = "|"
+		for element in sfl:
+			linesplit = element.split(sep)
+			file = linesplit[0]
+			file = file.strip()
+			selectedfileslist.append(file)
+		print(selectedfileslist) # nur zu Testzwecken
 
 	def getMaxLenFromList(self, lst):
 		longest = 0
