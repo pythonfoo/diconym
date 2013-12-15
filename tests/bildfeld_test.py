@@ -2,23 +2,28 @@
 # -*- coding: utf-8 -*-
 
 from Tkinter import *
+import os
 
 main = Tk()
 main.title("Testdialog")
-# create the canvas, size in pixels
+# size in pixels
 canvas = Canvas(main, width = 350, height = 350, bg = "white")
-# pack the canvas into a frame/form
 canvas.grid(row=0, column=0)
-#expand = YES, fill = BOTH)
-# load the .gif image file
-# put in your own gif file here, may need to add full path
-# like 'C:/WINDOWS/Help/Tours/WindowsMediaPlayer/Img/mplogo.gif'
-path =  '/home/michael/git/diconym/UIelements/diconym_logo.gif'
+
+
+# find the image
+bild = 'UIelements/diconym_logo.gif'
+path = os.chdir("..")
+path = os.path.abspath(".")
+path = path + "/" + bild
+
 gif1 = PhotoImage(file = path)
-# put gif image on canvas
-# pic's upper left corner (NW) on the canvas is at x=50 y=10
+
+# put image on canvas
+# image's upper left corner (NW) on the canvas is at x=10 y=10
 canvas.create_image(10, 10, image = gif1, anchor = NW)
-# run it ...
+
+# some more elements
 ausgabetext= """DICOnyM is a program to make Dicom files anonymous for science, education and more\n
 It's Free Software - you can redistribute it and/or modify it\n
 under the terms of the GNU General Public License as published by\n
