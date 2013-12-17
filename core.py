@@ -26,7 +26,13 @@ import os
 import dicom
 
 
-def isDicom(fullpath):                                                          
+def isDicom(fullpath):
+    """
+    Check if a file is a DICOM file
+    
+    Args:
+        fullpath (str): the FULL path of the file to check
+    """                                                          
     isOk = True                                                                 
     try:                                                                        
         dcm = dicom.read_file(fullpath)                                          
@@ -37,6 +43,17 @@ def isDicom(fullpath):
     return isOk   
 
 def getFilesFromDir(dirPath):
+    """
+    Get a dictionary of fullpath:filename from a given path
+    that contains ONLY valid DICOM files
+    
+    Args:
+        dirPath (str): the FULL path of the directory to scan
+    Returns:
+        dictionary of fullpath:filename
+    Raises:
+        None
+    """
     dirList = os.listdir(dirPath)                                               
     dcmFiles = {}                                           
     for fname in dirList:                                                       

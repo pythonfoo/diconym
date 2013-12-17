@@ -32,24 +32,26 @@ import core
 class MainDialog(object):
 	"""Erzeugt den Hauptdialog"""
 
-	def dialogframe(self, title, statustext):
+	def dialogframe(self, title, statustext, c=1, cs=1):
 		"""Common elemts for dialogs"""
 		self.sdia = DialogMaker()
 		self.sdia.title(title)
 		self.sdia.menu()
-		self.sdia.topmenu(_("Tasks"))
-		self.sdia.menuentry(_("Choice directory..."), self.choosedir)
-		self.sdia.menuentry(_("Settings ..."), self.settingsdia)
+		self.sdia.taskmenu(_("Tasks"))
+		self.sdia.taskmenuentry(_("Choose directory..."), self.choosedir)
+		self.sdia.taskmenuentry(_("Settings ..."), self.settingsdia)
 		self.sdia.exitmenupoint()
 
-		status = self.sdia.statusbar(_(statustext), 1, 0)
+		status = self.sdia.statusbar(statustext, c, 0, cs)
 
 	def startdia(self):
 		"""First dialog"""
 		stitle = _("DICOnyM - Makes Dicom files anonymous")
 
 		sstatustext = "Start"
-		self.dialogframe(stitle, sstatustext)
+		self.dialogframe(stitle, sstatustext, 2, 2)
+
+		self.sdia.bilderfeld("UIelements/diconym_logo.gif", 350, 350, 0, 0)
 
 		stext = _("""DICOnyM is a program to make Dicom files anonymous for science, education and more\n
 It's Free Software - you can redistribute it and/or modify it\n
@@ -58,7 +60,7 @@ the Free Software Foundation;\n
 either version 3 of the License,\n
 or (at your option) any later version.""")
 
-		self.sdia.label(stext, 120,  0, 0, "yellow")
+		self.sdia.label(stext, 100,  0, 1, "yellow")
 		self.ended = self.sdia
 		self.sdia.mainloop()
 
@@ -71,7 +73,7 @@ or (at your option) any later version.""")
 		"""Dialog zum Setzen der Einstellungen"""
 		self.endedia()
 		
-		print "hier"
+		print("hier")
 
 	def choosedir(self):
 		foldername = self.ended.folderOpenDialog()
@@ -93,10 +95,19 @@ or (at your option) any later version.""")
 																			val=allFiles[k], lFileName=longestFileName))
 
 			stitle = _("DICOnyM - Makes Dicom files anonymous")
+			sstatustext = _("File list")
 
-			sstatustext = "File list"
+			h = len(finalStringList)
+			maxh = False # Listbox ohne Scrollbar
+			mh = 10 # kann evt. hoeher gesetzt werden
+			if h > mh: 
+				h = mh
+				maxh = True # Listbox mit Scrollbar
 			self.dialogframe(stitle, sstatustext)
-			self.sdia.tablelistbox(finalStringList, sumLineLen, 0, 0)
+			self.sdia.tablelistbox(finalStringList, sumLineLen, h, 0, 0, maxh)
+
+			self.sdia.editmenu(_("Edit"))
+			self.sdia.editmenuentry(_("Choose selected files"), self.selectedfiles)
 			self.ended = self.sdia
 			self.sdia.mainloop()
 
@@ -105,6 +116,17 @@ or (at your option) any later version.""")
 			stext = _("No dicom files found")
 			self.sdia.mwarning(stitle, stext)
 			self.choosedir()
+
+	def selectedfiles(self):
+		sfl = self.sdia.mehrfachauswahl(self.sdia.listbox)
+		selectedfileslist = []
+		sep = "|"
+		for element in sfl:
+			linesplit = element.split(sep)
+			file = linesplit[0]
+			file = file.strip()
+			selectedfileslist.append(file)
+		print(selectedfileslist) # nur zu Testzwecken
 
 	def getMaxLenFromList(self, lst):
 		longest = 0

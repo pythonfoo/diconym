@@ -80,9 +80,15 @@ class DialogMaker(object):
 		self.listbox.grid(row=r, column=c, padx=5)
 		return self.listbox
 
-	def tablelistbox(self, liste, w, r, c):
-		"""Erzeugt ein Listenfeld"""
-		self.listbox = Listbox(self.dia, width=w)
+	def tablelistbox(self, liste, w, h, r, c, maxh):
+		"""Erzeugt ein Listenfeld mit Mehrfachauswahl und Scrollbalken"""
+		if maxh == True:
+			scb = Scrollbar(self.dia, orient=VERTICAL)
+			scb.grid(row=r, column=c+1, sticky='ns')
+			self.listbox = Listbox(self.dia, width=w, height = h, selectmode=EXTENDED, yscrollcommand=scb.set)
+			scb.config(command=self.listbox.yview)
+		else:
+			self.listbox = Listbox(self.dia, width=w, height = h, selectmode=EXTENDED)
 		_fontl = Font(family='Courier', size=10, underline=1)
 		self.listbox.config(font=_fontl)
 		#self.listbox.config(font=('Courier 10 Pitch', 10))
@@ -95,6 +101,27 @@ class DialogMaker(object):
 		"""Stellt die im Listenfeld des Dialoges gewaehlte Auswahl fest"""
 		auswahl=listbox.get("active").strip()
 		return auswahl
+
+	def mehrfachauswahl(self, listbox):
+		auswahl=[]
+		for e in listbox.curselection():
+			element = listbox.get(e)
+			auswahl.append(element)
+		return auswahl
+
+	def bilderfeld(self, bild, w, h, r, c):
+
+		canvas = Canvas(self.dia, width = w, height = h, bg = 'white')
+		canvas.grid(row=r, column=c)
+
+		bpath = os.path.abspath(".")
+		bpath = bpath + "/" + bild
+
+		gif1 = PhotoImage(file = bpath)
+		canvas.create_image(10, 10, image = gif1, anchor=NW)
+
+		lb = Label(self.dia, text = bpath, width=45, bg="yellow")
+		lb.grid(row=1, column=0, columnspan=1)
 
 	# Allgemeine Elemente
 
@@ -139,18 +166,25 @@ class DialogMaker(object):
 		self.menu = Menu(self.dia)
 		self.dia.config(menu=self.menu)
 
-	def topmenu(self, topname):
-		self.topmenu = Menu(self.menu)
-		self.menu.add_cascade(label=topname, menu=self.topmenu)
+	def taskmenu(self, topname):
+		self.taskmenu = Menu(self.menu)
+		self.menu.add_cascade(label=topname, menu=self.taskmenu)
 
-	def menuentry(self, mlabel, mcommand):
-		self.topmenu.add_command(label=mlabel, command=mcommand)
+	def taskmenuentry(self, mlabel, mcommand):
+		self.taskmenu.add_command(label=mlabel, command=mcommand)
 
-	def menuseparator(self):
-		self.topmenu.add_separator()
+	def taskmenuseparator(self):
+		self.taskmenu.add_separator()
 
 	def exitmenupoint(self):
-		self.topmenu.add_command(label=_("Exit"), command=self.ende)
+		self.taskmenu.add_command(label=_("Exit"), command=self.ende)
+
+	def editmenu(self, topname):
+		self.editmenu = Menu(self.menu)
+		self.menu.add_cascade(label=topname, menu=self.editmenu)
+
+	def editmenuentry(self, mlabel, mcommand):
+		self.editmenu.add_command(label=mlabel, command=mcommand)
 
 
 def main():
