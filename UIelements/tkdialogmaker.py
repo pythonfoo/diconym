@@ -110,18 +110,15 @@ class DialogMaker(object):
 		return auswahl
 
 	def bilderfeld(self, bild, w, h, r, c):
-
-		canvas = Canvas(self.dia, width = w, height = h, bg = 'white')
-		canvas.grid(row=r, column=c)
-
+		"""Erzeugt ein Label mit einem Bild darauf"""
 		bpath = os.path.abspath(".")
 		bpath = bpath + "/" + bild
 
 		gif1 = PhotoImage(file = bpath)
-		canvas.create_image(10, 10, image = gif1, anchor=NW)
 
-		lb = Label(self.dia, text = bpath, width=45, bg="yellow")
-		lb.grid(row=1, column=0, columnspan=1)
+		lb = Label(self.dia, image = gif1, width = w, height = h, bg = "white")
+		lb.gif1 = gif1
+		lb.grid(row=r, column=c)
 
 	# Allgemeine Elemente
 

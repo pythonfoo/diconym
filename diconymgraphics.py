@@ -47,7 +47,6 @@ class MainDialog(object):
 	def startdia(self):
 		"""First dialog"""
 		stitle = _("DICOnyM - Makes Dicom files anonymous")
-
 		sstatustext = "Start"
 		self.dialogframe(stitle, sstatustext, 2, 2)
 

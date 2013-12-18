@@ -6,10 +6,10 @@ import os
 
 main = Tk()
 main.title("Testdialog")
-# size in pixels
-canvas = Canvas(main, width = 350, height = 350, bg = "white")
-canvas.grid(row=0, column=0)
 
+# size in pixels
+#canvas = Canvas(width = 350, height = 350, bg = "white")
+#canvas.grid(row=0, column=0)
 
 # find the image
 bild = 'UIelements/diconym_logo.gif'
@@ -21,8 +21,9 @@ gif1 = PhotoImage(file = path)
 
 # put image on canvas
 # image's upper left corner (NW) on the canvas is at x=10 y=10
-canvas.create_image(10, 10, image = gif1, anchor = NW)
-
+#canvas.create_image(10, 10, image = gif1, anchor = NW)
+lb = Label(main, image=gif1, width = 350, height = 350, bg = "white")
+lb.grid(row=0, column=0)
 # some more elements
 ausgabetext= """DICOnyM is a program to make Dicom files anonymous for science, education and more\n
 It's Free Software - you can redistribute it and/or modify it\n
