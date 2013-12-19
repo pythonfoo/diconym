@@ -62,7 +62,7 @@ class Multilistbox(Frame):
             frame.pack(side=LEFT, expand=YES, fill=BOTH)
             headlabel = Label(frame, text=label.text, borderwidth=1, relief=RAISED, fg=label.text_color
                 , bg=label.header_color)
-            headlabel.bind('<Button-1>', lambda e, s=self: s._select_head(e.x, e.y)) # TODO: Klick on Label is just in Last !!!!!!!!!
+            headlabel.bind('<Button-1>', lambda e, s=self: s._select_head(e, e.x, e.y)) # TODO: Klick on Label is just in Last !!!!!!!!!
             # TODO: GO ON Here Oerb.....
             headlabel.pack(fill=X)
                                         # TODO config Property borderwith, relief
@@ -110,10 +110,14 @@ class Multilistbox(Frame):
 
         return sortedlist
 
-    def _select_head(self, x, y):
-        for l in self.lists:
-            l.scan_mark(x, y)
-            print (x,y)
+    def _select_head(self, e, x, y):
+        # for l in self.lists:
+            # l.scan_mark(x, y)
+            # print (x,y, e.x_root, e.y_root, e.widget.cget('text'))
+        for label in self._get_sorted_labellist():
+            if label.text == e.widget.cget('text'):
+                sortindex = label.position -1
+                self._sortrow(sortindex, label)
         return 'break'
 
     def _select(self, y):
@@ -151,12 +155,36 @@ class Multilistbox(Frame):
     def index(self, index):
         self.lists[0].index(index)
 
-    def insert(self, index, *elements):
+    def _insert(self, index, *elements):
+        # insert Row into Tkinter Listboxes
         for e in elements:
             i = 0
-            for l in self.lists:
+            for l in self.lists:  # inherits TKINTER Listboxes
                 l.insert(index, e[i])
                 i = i + 1
+    
+    def append(self, **kwargs):
+        """
+        append data by kwarg 'data' 
+        example: [(a1,a2,a3),(b1,b2,b3)]
+        """
+        if "data" in kwargs.keys():
+            for linelist in kwargs["data"]:
+                self._insert(END,linelist)
+                #self.pack(expand=YES,fill=BOTH) 
+            self.datalist = kwargs["data"]
+    
+    def _sortrow(self, position, label):
+        if label.reversesort:
+            order = False
+            label.reversesort = False
+        else:
+            order = True
+            label.reversesort = True
+        self.datalist = sorted(self.datalist, key=lambda pos: pos[position], reverse=order)
+        last = len(self.datalist)
+        self.delete(0,last)
+        self.append(data=self.datalist)
 
     def size(self):
         return self.lists[0].size()
@@ -193,8 +221,9 @@ class Multilistbox_label(object):
     @width = set width
     @position = set Position
     """
-    def __init__(self, labelname):
+    def __init__(self, labelname, **args):
         # private Properties pleas do not use them
+        # TODO: args** using the Object list to fill properties
         self._name = ""
         self._text = ""
         self._text_color = "black"
@@ -202,6 +231,7 @@ class Multilistbox_label(object):
         self._is_filter = False
         self._width = 10
         self._position = 1
+        self._reversesort = False
         # set Name
         self.name = labelname
 
@@ -291,6 +321,17 @@ class Multilistbox_label(object):
         else:
             raise TabError
 
+    @property
+    def reversesort(self):
+        return self._reversesort
+
+    @reversesort.setter
+    def reversesort(self, value):
+        if isinstance(value, bool):
+            self._reversesort = value
+        else:
+            raise TypeError
+
 if __name__ == '__main__':
     tk = Tk()
     Label(tk, text='MultiListbox_by_Oerb').pack()
@@ -325,8 +366,12 @@ if __name__ == '__main__':
     mlb.append_label(label4)
     mlb.show()
     # TODO: Dynamische Laenge Spalten pruefen
+    datalist = []
     for i in range(5):
-        mlb.insert(END, ('Important Message: %d' % i, 'John Doe', '10/10/%04d' % (1900+i),'by Oerb'))
+        datalist.append(('Important Message: %d' % i, 'John Doe', '10/10/%04d' % (1900+i),'by Oerb'))
+    mlb.append(data=datalist)
+    #for i in range(5):
+    #    mlb._insert(END, ('Important Message: %d' % i, 'John Doe', '10/10/%04d' % (1900+i),'by Oerb'))
     mlb.pack(expand=YES,fill=BOTH)
     tk.mainloop()
 

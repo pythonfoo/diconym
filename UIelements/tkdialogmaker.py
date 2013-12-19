@@ -109,6 +109,17 @@ class DialogMaker(object):
 			auswahl.append(element)
 		return auswahl
 
+	def bilderfeld(self, bild, w, h, r, c):
+		"""Erzeugt ein Label mit einem Bild darauf"""
+		bpath = os.path.abspath(".")
+		bpath = bpath + "/" + bild
+
+		gif1 = PhotoImage(file = bpath)
+
+		lb = Label(self.dia, image = gif1, width = w, height = h, bg = "white")
+		lb.gif1 = gif1 # ohne diese Zeile kein Bild s. http://tkinter.unpythonic.net/wiki/PhotoImage
+		lb.grid(row=r, column=c)
+
 	# Allgemeine Elemente
 
 	def label(self, ausgabetext, w, r, c, bgc, cs=1):
