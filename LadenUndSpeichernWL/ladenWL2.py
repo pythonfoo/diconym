@@ -5,11 +5,11 @@ class WhiteList(object):
 		pass
 
 	def mainReadWhiteList(self,filename):
-		filecontent = self.readFile(filename)
-		lines = self.readLine(filecontent)
-		lines = self.ignoreLinesSharp(lines)
-		lines = self.ignoreLinesSpaces(lines)
-		result = self.stringConverter(lines)
+		filecontent = self._readFile(filename)
+		lines = self._readLine(filecontent)
+		lines = self._ignoreLinesSharp(lines)
+		lines = self._ignoreLinesSpaces(lines)
+		result = self._stringConverter(lines)
 		return result
 
 	def _readFile(self,filename):
