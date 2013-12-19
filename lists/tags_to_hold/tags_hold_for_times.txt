@@ -1,8 +1,8 @@
 #tags to hold
-
-
+#
+#
 #for times
-
+#
 0008,0020	study date
 0008,0021	series date
 0008,0022	Acquisition date
