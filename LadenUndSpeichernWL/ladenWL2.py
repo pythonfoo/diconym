@@ -5,11 +5,13 @@ class WhiteList(object):
 		pass
 
 	def mainReadWhiteList(self,filename):
-		filecontent = self.readFile(filename)
-		lines = self.readLine(filecontent)
-		lines = self.ignoreLinesSharp(lines)
-		lines = self.ignoreLinesSpaces(lines)
-		result = self.stringConverter(lines)
+		filecontent = self._readFile(filename)
+		lines = self._readLine(filecontent)
+		lines = self._ignoreLinesSharp(lines)
+		lines = self._ignoreBackslash(lines)
+		lines = self._ignoreClearLines(lines)
+		lines = self._ignoreLinesSpaces(lines)
+		result = self._stringConverter(lines)
 		return result
 
 	def _readFile(self,filename):
@@ -25,7 +27,7 @@ class WhiteList(object):
 	def _ignoreLinesSharp(self,lines):
 		result = []
 		for line in lines:
-			if list(line)[0] == '#':
+			if line.startswith('#'):
 				pass
 			else:
 				result.append(line)
@@ -43,7 +45,24 @@ class WhiteList(object):
 			result.append(tmpLine)
 			tmpLine = ''
 		return result
-
+	
+	def _ignoreBackslash(self,lines):
+		result = []
+		for line in lines:
+			if '\r' in line:
+				line = line.split('\r')
+				result.append(line[0])
+			else:
+				result.append(line)
+		return result
+	
+	def _ignoreClearLines(self,lines):
+		result = []
+		for line in lines:
+			if line != '':
+				result.append(line)
+		return result
+	
 	def _stringConverter(self,lines):
 		result = []
 		tmpPart1 = ''

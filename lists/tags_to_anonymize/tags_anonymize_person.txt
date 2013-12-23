@@ -1,8 +1,8 @@
 #tags to anonymize
-
-
+#
+#
 #anonymize patient
-
+#
 0010,0010	name
 0010,0020	patientID
 0010,0030	birthday
