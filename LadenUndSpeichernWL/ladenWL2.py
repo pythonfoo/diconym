@@ -37,9 +37,9 @@ class WhiteList(object):
 		result = []
 		tmpLine = ''
 		for line in lines:
-			for i in range(len(line)):
-				if list(line)[i] != '	' and list(line)[i] != ' ':
-					tmpLine += list(line)[i]
+			for lineChar in line:
+				if lineChar != "\t" and lineChar != ' ':
+					tmpLine += lineChar
 				else:
 					break
 			result.append(tmpLine)
@@ -110,4 +110,9 @@ class WhiteList(object):
 if __name__ == '__main__':
 	print 'Funktion wird aufgerufen'
 	wl = WhiteList()
-	wl.categoryListFiles('/media/M3NT0R/Privat/Projekte/git/diconym/lists')
+	tmpList = wl.categoryListFiles('../lists')
+	print tmpList
+	for category in tmpList:
+		for list in tmpList[category]:
+			tmp = wl.mainReadWhiteList('../lists/'+category +'/'+list+'.txt')
+			print tmp

@@ -81,18 +81,22 @@ def get_valuesfromImage(filename):
     return datalist 
 
 
-def anonymize_byWhitelist(whitelist, filename, newfilename):                    
+def anonymize_byWhitelist_bak(whitelist, filename, newfilename):
     """                                                                         
     """ 
     def tagbased_callback(ds, data_element):                                    
         """                                                                     
         Delete the value in non Whitelisted Tags                                
         TODO:                                                                   
-        """                                                                     
+        """
+        cnt = 0
         for whitelisttag in whitelist:                                          
-            if data_element.tag != whitelisttag:                                
-                data_element.value == ""                                        
-                                                                                
+            if str(data_element.tag) != str(whitelisttag):
+                cnt+=1
+                data_element.value = ""
+            else:
+                print 'keep:', data_element.tag
+        print cnt
     # Load the current dicom file to get tag- and valuelist                     
     dataset = dicom.read_file(filename)                                         
                                                                                 
@@ -100,4 +104,26 @@ def anonymize_byWhitelist(whitelist, filename, newfilename):
     dataset.walk(tagbased_callback)                                             
                                                                                 
     # save file to newfilename                                                  
-    dataset.save(newfilename)
+    dataset.save_as(newfilename)
+
+def anonymize_byWhitelist(whitelist, filename, newfilename):
+    """
+    """
+
+    # Load the current dicom file to get tag- and valuelist
+    dataset = dicom.read_file(filename)
+
+    # write delete nonwhitelist tag values into datalist
+    #dataset.walk(tagbased_callback)
+    cnt = 0
+    for dt in dataset.keys():
+        print dt
+    exit()
+    #for whitelisttag in whitelist:
+    #    if str(data_element.tag) != str(whitelisttag):
+     #       cnt+=1
+      #      data_element.value = ""
+       # else:
+        #    print 'keep:', data_element.tag
+    # save file to newfilename
+    dataset.save_as(newfilename)

@@ -3,5 +3,5 @@
 #
 #hold for scientific
 #
-0010,0030	birthday
+#0010,0030	birthday
 0010,0040	sex
