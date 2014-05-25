@@ -12,3 +12,42 @@
 0020,0037	image orientation
 0020,ff
 0028,ff
+# forgotten!
+0028,0102	High Bit
+7fe0,0010	Pixel Data
+0020,0052	Frame of Reference UID
+0028,0004	Photometric Interpretation
+0028,0100	Bits Allocated
+0008,0008	Image Type
+0018,0050	Slice Thickness
+0010,0000	Group Length
+0008,0005	Specific Character Set
+0028,0103	Pixel Representation
+0028,0002	Samples per Pixel
+0008,0000	Group Length
+0018,115e	Image and Fluoroscopy Area Dose Pro
+0008,0060	Modality
+0028,0010	Rows
+0028,0011	Columns
+0028,0000	Group Length
+0020,0000	Group Length
+0018,0000	Group Length
+0028,0030	Pixel Spacing
+0028,1054	Rescale Type
+0028,1053	Rescale Slope
+0028,1052	Rescale Intercept
+# not that important
+0028,1051	Window Width
+0028,1050	Window Center
+0020,1040	Position Reference Indicator
+0018,8151	X-Ray Tube Current in uA
+0018,1150	Exposure Time
+0018,1151	X-Ray Tube Current
+0008,103e	Series Description
+0008,1030	Study Description
+0028,9520	Image to Equipment Mapping Matrix
+0008,2218	Anatomic Region Sequence
+0008,0104	Code Meaning
+0008,0102	Coding Scheme Designator
+0008,0100	Code Value
+0008,0016	SOP Class UID
