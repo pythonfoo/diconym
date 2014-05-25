@@ -11,9 +11,9 @@ sourceDir = ''
 destDir = ''
 if len(sys.argv) != 3:
 	print 'Arguments have to be: "source_path" "dest_path"'
-	#exit(1)
-	sourceDir = '/home/bison/Dokumente/test/001_Anatomie_UK_Patient_1/DVT UK Patient 1'
-	destDir = '/home/bison/Dokumente/test/tmp'
+	exit(1)
+	#sourceDir = '/home/bison/Dokumente/test/001_Anatomie_UK_Patient_1/DVT UK Patient 1'
+	#destDir = '/home/bison/Dokumente/test/tmp'
 else:
 	sourceDir = sys.argv[1]
 	destDir = sys.argv[2]
