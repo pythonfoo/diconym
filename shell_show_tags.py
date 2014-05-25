@@ -24,11 +24,24 @@ def getValMaxLen(val):
 
 dataset = dicom.read_file(filePath)
 
+for k, val in dataset.iteritems():
+	print k
+	print val
+	print 10*'#'
+
+
+exit(0)
 for dt in dataset.keys():
 	print 'key:    ', dt
+	#if isinstance([], dt):
+	#	print 'cant show list!'
+	#else:
+	#print 'foo:', type(dt.value), dt.value
 	try:
 		print 'dataset:', dataset[dt]
 		print 'value:  ', getValMaxLen(dataset[dt].value)
 	except Exception as ex:
+		print 'ERROR:'
+		print 'typ:', type(dt)
 		print ex
 	print 10*'#'

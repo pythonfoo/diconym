@@ -10,8 +10,9 @@
 0020,0020	patient orientation
 0020,0032	image position
 0020,0037	image orientation
-0020,ff
-0028,ff
+#0020,ff
+#0028,ff
+
 # forgotten!
 0028,0102	High Bit
 7fe0,0010	Pixel Data
@@ -32,10 +33,17 @@
 0028,0000	Group Length
 0020,0000	Group Length
 0018,0000	Group Length
+0008,0000	Group Length
+7fe0,0000	Group Length
 0028,0030	Pixel Spacing
 0028,1054	Rescale Type
 0028,1053	Rescale Slope
 0028,1052	Rescale Intercept
+#0009,0011	some sort of list
+0008,0012	Instance Creation Date
+0008,0013	Instance Creation Time
+0028,0101	Bits Stored
+
 # not that important
 0028,1051	Window Width
 0028,1050	Window Center
@@ -51,3 +59,4 @@
 0008,0102	Coding Scheme Designator
 0008,0100	Code Value
 0008,0016	SOP Class UID
+#0008,0018	SOP Instance UID

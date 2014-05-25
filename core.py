@@ -24,7 +24,7 @@ __license__ = "GPL v3 Plus"
 
 import os
 import dicom
-
+import random
 
 def isDicom(fullpath):
 	"""
@@ -114,6 +114,7 @@ def anonymize_byWhitelist(whitelist, filename, newfilename):
 	for ar in whitelist:
 		for subAr in ar:
 			nwhitelist.append(str(subAr).replace("'", ''))
+	#print nwhitelist
 
 	# Load the current dicom file to get tag- and valuelist
 	dataset = dicom.read_file(filename)
@@ -121,17 +122,36 @@ def anonymize_byWhitelist(whitelist, filename, newfilename):
 	# write delete nonwhitelist tag values into datalist
 	#dataset.walk(tagbased_callback)
 
-	for dt in dataset.keys():
+	for dt in dataset:
 		#print type(dt)
-		if str(dt) in nwhitelist:
+		#print dt, dt.__dict__
+		#print dt.tag
+		if str(dt.tag) in nwhitelist:
 			pass
 			#print 'keep:', str(dt)
 			#print dataset[dt]
+			#insatnce number
+			#series number
 		else:
-			print 'del:', str(dt), '|', dataset[dt].value
-			dataset[dt].value = ''
-			print dataset[dt]
-
+			if 'value' in dt.__dict__:
+				print 'del:', dt
+				print 'val:', dataset.value
+				dataset.value = ''
+			else:
+				print 'hard reset:', dt
+				tmpType = type(dt._value)
+				if tmpType is str:
+					dt._value = ''
+				elif tmpType is int or tmpType is float:
+					dt._value = 0
+				elif tmpType is list:
+					dt._value = []
+				elif str(tmpType) == "<class 'dicom.UID.UID'>":
+					dt._value = "0"
+					#print 'UID cant be reset', tmpType
+				else:
+					print 'unknown type:', '#'+str(tmpType)+'#'
+					dt._value = ""
 	#for whitelisttag in whitelist:
 	#    if str(data_element.tag) != str(whitelisttag):
 	 #       cnt+=1
